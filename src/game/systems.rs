@@ -1,0 +1,30 @@
+use bevy::prelude::*;
+
+use super::SimulationState;
+
+pub fn pause_simulation(mut simulate_state_next_state: ResMut<NextState<SimulationState>>) {
+    simulate_state_next_state.set(SimulationState::Paused);
+}
+pub fn resume_simulation(mut simulate_state_next_state: ResMut<NextState<SimulationState>>) {
+    simulate_state_next_state.set(SimulationState::Running);
+}
+
+pub fn toggle_simulation(
+    mut commands: Commands,
+    keyboard_input: Res<ButtonInput<KeyCode>>,
+    simulation_state: Res<State<SimulationState>>
+) {
+    if keyboard_input.pressed(KeyCode::Space) {
+        match simulation_state.get() {
+            SimulationState::Running => {
+                commands.insert_resource(NextState(Some(SimulationState::Paused)));
+                println!("SimulationState::Paused")
+            }
+
+            SimulationState::Paused => {
+                commands.insert_resource(NextState(Some(SimulationState::Running)));
+                println!("SimulationState::Running")
+            }
+        }
+    }
+}
