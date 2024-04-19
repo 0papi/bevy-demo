@@ -58,69 +58,52 @@ pub fn build_game_over_menu(commads: &mut Commands, asset_server: &Res<AssetServ
                 ..Default::default()
             });
 
-            parent.spawn((
-                TextBundle {
-                    text: Text {
-                        sections: vec![
-                            TextSection::new("Your final score was:", TextStyle {
-                                font_size: 32.0,
-                                font: asset_server.load("fonts/FiraSans-Bold.ttf"),
-                                color: Color::WHITE,
-                            })
-                        ],
-                        ..default()
-                    },
-                    ..default()
-                },
-                FinalScoreText {},
-            ));
-
             // ==== Score ====
-            // parent
-            //     .spawn(NodeBundle {
-            //         style: Style {
-            //             flex_direction: FlexDirection::Row,
-            //             justify_content: JustifyContent::Center,
-            //             align_items: AlignItems::Center,
-            //             column_gap: Val::Px(40.0),
-            //             ..Default::default()
-            //         },
-            //         ..Default::default()
-            //     })
-            //     .with_children(|parent| {
-            //         parent.spawn(TextBundle {
-            //             text: Text {
-            //                 sections: vec![TextSection {
-            //                     value: "Score:".to_string(),
-            //                     style: TextStyle {
-            //                         font_size: 32.0,
-            //                         font: asset_server.load("fonts/FiraSans-Bold.ttf"),
-            //                         color: Color::WHITE,
-            //                     },
-            //                 }],
-            //                 justify: JustifyText::Center,
-            //                 ..Default::default()
-            //             },
-            //             ..Default::default()
-            //         });
-            //         parent.spawn((
-            //             TextBundle {
-            //                 text: Text {
-            //                     sections: vec![
-            //                         TextSection::new("0", TextStyle {
-            //                             font_size: 32.0,
-            //                             font: asset_server.load("fonts/FiraSans-Bold.ttf"),
-            //                             color: Color::WHITE,
-            //                         })
-            //                     ],
-            //                     justify: JustifyText::Center,
-            //                     ..Default::default()
-            //                 },
-            //                 ..Default::default()
-            //             },
-            //             FinalScoreText {},
-            //         ));
-            //     });
+            parent
+                .spawn(NodeBundle {
+                    style: Style {
+                        flex_direction: FlexDirection::Row,
+                        justify_content: JustifyContent::Center,
+                        align_items: AlignItems::Center,
+                        column_gap: Val::Px(40.0),
+                        ..Default::default()
+                    },
+                    ..Default::default()
+                })
+                .with_children(|parent| {
+                    parent.spawn(TextBundle {
+                        text: Text {
+                            sections: vec![TextSection {
+                                value: "Score:".to_string(),
+                                style: TextStyle {
+                                    font_size: 32.0,
+                                    font: asset_server.load("fonts/FiraSans-Bold.ttf"),
+                                    color: Color::WHITE,
+                                },
+                            }],
+                            justify: JustifyText::Center,
+                            ..Default::default()
+                        },
+                        ..Default::default()
+                    });
+                    parent.spawn((
+                        TextBundle {
+                            text: Text {
+                                sections: vec![
+                                    TextSection::new("0", TextStyle {
+                                        font_size: 32.0,
+                                        font: asset_server.load("fonts/FiraSans-Bold.ttf"),
+                                        color: Color::WHITE,
+                                    })
+                                ],
+                                justify: JustifyText::Center,
+                                ..Default::default()
+                            },
+                            ..Default::default()
+                        },
+                        FinalScoreText {},
+                    ));
+                });
             // ==== Highest Score ====
             // parent
             //     .spawn(NodeBundle {
