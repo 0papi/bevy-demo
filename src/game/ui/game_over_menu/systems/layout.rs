@@ -1,20 +1,10 @@
 use bevy::prelude::*;
 
-use crate::{
-    event::GameOver,
-    game::ui::{
-        component::{ FinalScoreText, GameOverMenu, MainMenuButton, QuitButton, ReplayButton },
-        styles::{ create_normal_button_styles, NORMAL_BUTTON_COLOUR },
-    },
+use crate::game::ui::{
+    component::{ FinalScoreText, GameOverMenu, MainMenuButton, QuitButton, ReplayButton },
+    styles::{ create_normal_button_styles, NORMAL_BUTTON_COLOUR },
 };
 
-/*
-this will show the game over screen which should contain the following
-  - text at the top showing game over
-  - player's score
-  - restart or play again button
-  - quit button
- */
 pub fn spawn_game_over_menu(mut commands: Commands, asset_server: Res<AssetServer>) {
     let _game_over_menu_entity = build_game_over_menu(&mut commands, &asset_server);
 }

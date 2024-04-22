@@ -30,7 +30,8 @@ impl Plugin for GamePlugin {
             .add_plugins(ScorePlugin)
             .add_plugins(StarPlugin)
             .add_plugins(UIPlugin)
-            .add_systems(StateTransition, toggle_simulation.run_if(in_state(AppState::Game)))
+
+            .add_systems(Update, toggle_simulation.run_if(in_state(AppState::Game)))
             .add_systems(OnExit(AppState::Game), resume_simulation);
     }
 }

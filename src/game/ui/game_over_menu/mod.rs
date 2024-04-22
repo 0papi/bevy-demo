@@ -32,7 +32,7 @@ impl Plugin for GameOverPlugin {
                     interact_with_quit_button,
                 ).run_if(in_state(AppState::GameOver))
             )
-            .add_systems(Update, update_final_score_text.run_if(in_state(AppState::GameOver)))
+            .add_systems(PostUpdate, update_final_score_text.run_if(in_state(AppState::GameOver)))
             .add_systems(OnExit(AppState::GameOver), despawn_game_over_menu);
     }
 }

@@ -23,8 +23,8 @@ fn main() {
         .add_plugins(GamePlugin)
 
         .add_systems(Startup, spawn_camera)
-        .add_systems(StateTransition, transition_to_game_state)
-        .add_systems(StateTransition, transition_to_main_menu_state)
+        .add_systems(Update, transition_to_game_state)
+        .add_systems(Update, transition_to_main_menu_state)
 
         .add_systems(Update, exit_game)
         .add_systems(Update, handle_game_over)
