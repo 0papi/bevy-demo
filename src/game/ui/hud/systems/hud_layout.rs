@@ -6,6 +6,12 @@ pub fn spawn_star_hud(mut commands: Commands, asset_server: Res<AssetServer>) {
     let _entity = build_star_hud(&mut commands, &asset_server);
 }
 
+pub fn despawn_hud(mut commands: Commands, hud_query: Query<Entity, With<HudDisplay>>) {
+    if let Ok(hud_entity) = hud_query.get_single() {
+        commands.entity(hud_entity).despawn_recursive();
+    }
+}
+
 pub fn build_star_hud(commands: &mut Commands, asset_server: &Res<AssetServer>) -> Entity {
     let entity = commands
         .spawn((
@@ -47,7 +53,6 @@ pub fn build_star_hud(commands: &mut Commands, asset_server: &Res<AssetServer>) 
                         },
                         ..default()
                     },
-                    StarDisplay {},
                 ))
                 .with_children(|parent| {
                     parent.spawn(ImageBundle {
@@ -62,21 +67,24 @@ pub fn build_star_hud(commands: &mut Commands, asset_server: &Res<AssetServer>) 
                         ..Default::default()
                     });
 
-                    parent.spawn(TextBundle {
-                        text: Text {
-                            sections: vec![TextSection {
-                                value: "4".to_string(),
-                                style: TextStyle {
-                                    font_size: 32.0,
-                                    font: asset_server.load("fonts/FiraSans-Bold.ttf"),
-                                    color: Color::WHITE,
-                                },
-                            }],
-                            justify: JustifyText::Center,
+                    parent.spawn((
+                        TextBundle {
+                            text: Text {
+                                sections: vec![TextSection {
+                                    value: "0".to_string(),
+                                    style: TextStyle {
+                                        font_size: 32.0,
+                                        font: asset_server.load("fonts/FiraSans-Bold.ttf"),
+                                        color: Color::WHITE,
+                                    },
+                                }],
+                                justify: JustifyText::Center,
+                                ..Default::default()
+                            },
                             ..Default::default()
                         },
-                        ..Default::default()
-                    });
+                        StarDisplay {},
+                    ));
                 });
         })
         .with_children(|parent| {
@@ -101,7 +109,6 @@ pub fn build_star_hud(commands: &mut Commands, asset_server: &Res<AssetServer>) 
                         },
                         ..default()
                     },
-                    RedBallDisplay {},
                 ))
                 .with_children(|parent| {
                     parent.spawn(ImageBundle {
@@ -116,21 +123,24 @@ pub fn build_star_hud(commands: &mut Commands, asset_server: &Res<AssetServer>) 
                         ..Default::default()
                     });
 
-                    parent.spawn(TextBundle {
-                        text: Text {
-                            sections: vec![TextSection {
-                                value: "6".to_string(),
-                                style: TextStyle {
-                                    font_size: 32.0,
-                                    font: asset_server.load("fonts/FiraSans-Bold.ttf"),
-                                    color: Color::WHITE,
-                                },
-                            }],
-                            justify: JustifyText::Center,
+                    parent.spawn((
+                        TextBundle {
+                            text: Text {
+                                sections: vec![TextSection {
+                                    value: "0".to_string(),
+                                    style: TextStyle {
+                                        font_size: 32.0,
+                                        font: asset_server.load("fonts/FiraSans-Bold.ttf"),
+                                        color: Color::WHITE,
+                                    },
+                                }],
+                                justify: JustifyText::Center,
+                                ..Default::default()
+                            },
                             ..Default::default()
                         },
-                        ..Default::default()
-                    });
+                        RedBallDisplay {},
+                    ));
                 });
         })
 

@@ -8,13 +8,21 @@ use systems::*;
 
 use crate::AppState;
 
-use self::hud_layout::spawn_star_hud;
+use self::{
+    hud_layout::{ despawn_hud, spawn_star_hud },
+    updates::{ update_enemy_text, update_score_text },
+};
 
 // TODO: Create HUD Plugin
 pub struct HUDPlugin;
 
 impl Plugin for HUDPlugin {
     fn build(&self, app: &mut App) {
-        app.add_systems(Update, spawn_star_hud.run_if(in_state(AppState::Game)));
+        app.add_systems(OnEnter(AppState::Game), spawn_star_hud.run_if(in_state(AppState::Game)))
+            .add_systems(
+                Update,
+                (update_score_text, update_enemy_text).run_if(in_state(AppState::Game))
+            )
+            .add_systems(OnExit(AppState::Game), despawn_hud);
     }
 }
